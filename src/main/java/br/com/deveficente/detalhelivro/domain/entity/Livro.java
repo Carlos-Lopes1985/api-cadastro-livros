@@ -1,6 +1,7 @@
 package br.com.deveficente.detalhelivro.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 @Entity
+@Data
 public class Livro {
 	
 	@Id
@@ -31,9 +33,15 @@ public class Livro {
 
 	private Integer numPaginas;
 
-	@ManyToOne
-	private @NotNull Categoria categoria;
-	
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "LIVRO_CATEGORIA",
+			joinColumns = @JoinColumn(name = "livro_id"),
+			inverseJoinColumns = @JoinColumn(name = "categoria_id")
+	)
+	private List<Categoria> categorias = new ArrayList<>();
+
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "autor_id")
 	private Autor autor;
@@ -55,7 +63,7 @@ public class Livro {
 		this.numPaginas = numPaginas;
 	}
 
-	public Livro(Integer id, String nome, String edicao, String descricao, String imagem, Integer codIsb, LocalDate dataLancamento, Double preco, Integer numPaginas, Categoria categoria, Autor autor) {
+	public Livro(Integer id, String nome, String edicao, String descricao, String imagem, Integer codIsb, LocalDate dataLancamento, Double preco, Integer numPaginas, List<Categoria> categorias, Autor autor) {
 		this.id = id;
 		this.nome = nome;
 		this.edicao = edicao;
@@ -65,97 +73,7 @@ public class Livro {
 		this.dataLancamento = dataLancamento;
 		this.preco = preco;
 		this.numPaginas = numPaginas;
-		this.categoria = categoria;
+		this.categorias = categorias;
 		this.autor = autor;
 	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getEdicao() {
-		return edicao;
-	}
-
-	public void setEdicao(String edicao) {
-		this.edicao = edicao;
-	}
-
-	public Integer getCodIsb() {
-		return codIsb;
-	}
-
-	public void setCodIsb(Integer codIsb) {
-		this.codIsb = codIsb;
-	}
-
-	public LocalDate getDataLancamento() {
-		return dataLancamento;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public String getImagem() {
-		return imagem;
-	}
-
-	public void setImagem(String imagem) {
-		this.imagem = imagem;
-	}
-
-	public void setDataLancamento(LocalDate dataLancamento) {
-		this.dataLancamento = dataLancamento;
-	}
-
-	public Double getPreco() {
-		return preco;
-	}
-
-	public void setPreco(Double preco) {
-		this.preco = preco;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
-	public Integer getNumPaginas() {
-		return numPaginas;
-	}
-
-	public void setNumPaginas(Integer numPaginas) {
-		this.numPaginas = numPaginas;
-	}
-
-	public Autor getAutor() {
-		return autor;
-	}
-
-	public void setAutor(Autor autor) {
-		this.autor = autor;
-	}
-	
-	
 }

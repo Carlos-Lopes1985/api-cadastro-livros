@@ -1,11 +1,15 @@
 package br.com.deveficente.detalhelivro.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Data
 public class Categoria {
 
 	@Id
@@ -16,10 +20,8 @@ public class Categoria {
 	@Column(unique=true)
 	private String nome;
 
-//	@JsonIgnore
-//	@ManyToOne
-//	@JoinColumn(name = "livro_id")
-//	private Livro livro;
+	@ManyToMany(mappedBy="categorias")
+	private List<Livro> livro = new ArrayList<>();
 
 	public Categoria() {
 	}
@@ -29,25 +31,4 @@ public class Categoria {
 		this.id = id;
 		this.nome = nome;
 	}
-
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-//	public Livro getLivro() {
-//		return livro;
-//	}
-//
-//	public void setLivro(Livro livro) {
-//		this.livro = livro;
-//	}
 }

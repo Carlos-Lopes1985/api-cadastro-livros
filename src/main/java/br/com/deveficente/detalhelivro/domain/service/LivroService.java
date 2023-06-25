@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,11 +40,12 @@ public class LivroService {
 
         Autor autor = new Autor();
         Categoria categoria = new Categoria();
+        categoria.setId(form.getIdCategoria());
+        List<Categoria> categorias = new ArrayList<>();
 
         autor.setId(form.getIdAutor());
-        categoria.setId(form.getIdCategoria());
+        categorias.addAll(Arrays.asList(categoria));
 
-        return new Livro(null,form.getNome(), form.getEdicao(), form.getDescricao(), form.getImagem(), form.getCodIsb(),form.getDataLancamento(),form.getPreco(),form.getNumPaginas(),categoria,autor);
-
+        return new Livro(null,form.getNome(), form.getEdicao(), form.getDescricao(), form.getImagem(), form.getCodIsb(),form.getDataLancamento(),form.getPreco(),form.getNumPaginas(),categorias,autor);
     }
 }

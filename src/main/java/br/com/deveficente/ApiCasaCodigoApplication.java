@@ -48,15 +48,20 @@ public class ApiCasaCodigoApplication implements CommandLineRunner {
 		Categoria cat3 = new Categoria(null, "Informática");
 		Categoria cat4 = new Categoria(null, "Português");
 
-		categoriaRepository.saveAll(Arrays.asList(cat, cat1,cat2,cat3,cat4));
-
 		Livro livro = new Livro(null,"Cleopata","1","História da princesa","sem",123456,LocalDate.of(2015,10,12),120.,500);
 		Livro livro2 = new Livro(null,"Popaye","1","História da princesa","sem",123456,LocalDate.of(2015,10,12),120.,500);
 		Livro livro3 = new Livro(null,"Batman","1","História da princesa","sem",123456,LocalDate.of(2015,10,12),120.,500);
 
-		livro.setCategoria(cat);
-		livro2.setCategoria(cat1);
-		livro3.setCategoria(cat4);
+
+		cat.getLivro().addAll(Arrays.asList(livro,livro3));
+		cat1.getLivro().addAll(Arrays.asList(livro2));
+		cat2.getLivro().addAll(Arrays.asList(livro,livro2,livro3));
+
+		livro.getCategorias().addAll(Arrays.asList(cat,cat2));
+		livro2.getCategorias().addAll(Arrays.asList(cat1,cat2));
+		livro3.getCategorias().addAll(Arrays.asList(cat,cat2));
+
+		categoriaRepository.saveAll(Arrays.asList(cat, cat1,cat2,cat3,cat4));
 
 		livro.setAutor(autor);
 		livro2.setAutor(autor2);
