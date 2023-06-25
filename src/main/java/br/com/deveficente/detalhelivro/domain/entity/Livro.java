@@ -55,6 +55,20 @@ public class Livro {
 		this.numPaginas = numPaginas;
 	}
 
+	public Livro(Integer id, String nome, String edicao, String descricao, String imagem, Integer codIsb, LocalDate dataLancamento, Double preco, Integer numPaginas, Categoria categoria, Autor autor) {
+		this.id = id;
+		this.nome = nome;
+		this.edicao = edicao;
+		this.descricao = descricao;
+		this.imagem = imagem;
+		this.codIsb = codIsb;
+		this.dataLancamento = dataLancamento;
+		this.preco = preco;
+		this.numPaginas = numPaginas;
+		this.categoria = categoria;
+		this.autor = autor;
+	}
+
 	public Integer getId() {
 		return id;
 	}
