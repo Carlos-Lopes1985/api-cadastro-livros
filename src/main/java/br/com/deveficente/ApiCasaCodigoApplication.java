@@ -58,6 +58,9 @@ public class ApiCasaCodigoApplication implements CommandLineRunner {
 		livro2.setCategoria(cat1);
 		livro3.setCategoria(cat4);
 
+		livro.setAutor(autor);
+		livro2.setAutor(autor2);
+		livro3.setAutor(autor);
 		livroRepository.saveAll(Arrays.asList(livro,livro2,livro3));
 	}
 }
