@@ -27,8 +27,9 @@ public class AutorService {
 	}
 
 	private Autor converteFormParaAutor(@Valid NovoAutorForm form) {
-		
-		return new Autor(null, form.getNome(),form.getDataNascimento(), LocalDateTime.now(),form.getLinkGit());
+
+		return null;
+		//return new Autor(null, form.getNome(),form.getDataNascimento(), LocalDateTime.now(),form.getLinkGit());
 	}
 
 	public List<Autor> buscarTodos() {

@@ -1,8 +1,6 @@
 package br.com.deveficente;
 
-import br.com.deveficente.detalhelivro.domain.entity.Autor;
-import br.com.deveficente.detalhelivro.domain.entity.Categoria;
-import br.com.deveficente.detalhelivro.domain.input.NovoAutorForm;
+import br.com.deveficente.detalhelivro.domain.entity.SubCategoria;
 import br.com.deveficente.detalhelivro.domain.input.NovoCategoriaForm;
 import br.com.deveficente.detalhelivro.domain.repository.CategoriaRepository;
 import br.com.deveficente.detalhelivro.domain.service.CategoriaService;
@@ -14,8 +12,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -29,13 +25,13 @@ public class CategoriaServiceTest {
     @InjectMocks
     private CategoriaService categoriaService;
 
-    private Categoria categoria;
+    private SubCategoria categoria;
 
     @Before
     public void init() {
         MockitoAnnotations.openMocks(this);
 
-        categoria = new Categoria(null, "Romance");
+        categoria = new SubCategoria(null, "Romance");
     }
 
     @Test
@@ -43,7 +39,7 @@ public class CategoriaServiceTest {
 
         Mockito.when(categoriaRepository.save(Mockito.any())).thenReturn(categoria);
         NovoCategoriaForm novoCategoriaForm = new NovoCategoriaForm("Romance");
-        Categoria categoriaNovo =  categoriaService.salvarCategoria(novoCategoriaForm);
+        SubCategoria categoriaNovo =  categoriaService.salvarCategoria(novoCategoriaForm);
 
         assertNotNull(categoriaNovo);
         assertEquals(categoriaNovo.getNome(), "Romance");

@@ -1,5 +1,6 @@
 package br.com.deveficente.detalhelivro.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import javax.persistence.*;
@@ -18,9 +19,14 @@ public abstract class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
-    @NotBlank
     private String nome;
+
+    @Column(unique=true)
+    private String email;
+    private String cpfCnpj;
+
+    @JsonIgnore
+    private String senha;
 
     @Past
     private LocalDate dataNascimento;

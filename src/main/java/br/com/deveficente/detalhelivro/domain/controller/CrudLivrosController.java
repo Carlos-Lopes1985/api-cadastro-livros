@@ -1,9 +1,6 @@
 package br.com.deveficente.detalhelivro.domain.controller;
 
-import br.com.deveficente.detalhelivro.domain.entity.Autor;
-import br.com.deveficente.detalhelivro.domain.entity.Categoria;
-import br.com.deveficente.detalhelivro.domain.entity.Livro;
-import br.com.deveficente.detalhelivro.domain.input.NovoCategoriaForm;
+import br.com.deveficente.detalhelivro.domain.entity.AudioVisual;
 import br.com.deveficente.detalhelivro.domain.input.NovoLivroForm;
 import br.com.deveficente.detalhelivro.domain.service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +19,12 @@ public class CrudLivrosController {
     private LivroService livroService;
 
     @GetMapping(value="/api/livros")
-    public ResponseEntity<List<Livro>> buscarTodasCategorias()throws Exception{
+    public ResponseEntity<List<AudioVisual>> buscarTodasCategorias()throws Exception{
         return ResponseEntity.ok().body(livroService.buscarTodos());
     }
 
     @GetMapping(value="/api/livros/{id}")
-    public ResponseEntity<Livro> buscarPorId(@PathVariable Integer id)throws Exception{
+    public ResponseEntity<AudioVisual> buscarPorId(@PathVariable Integer id)throws Exception{
 
         return ResponseEntity.ok().body(livroService.buscarPorId(id));
     }
@@ -35,7 +32,7 @@ public class CrudLivrosController {
     @PostMapping(value="/api/livros")
     public ResponseEntity<Void> novoAutor(@Valid @RequestBody NovoLivroForm form) {
 
-        Livro livro = livroService.salvar(form);
+        AudioVisual livro = livroService.salvar(form);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(livro.getId()).toUri();

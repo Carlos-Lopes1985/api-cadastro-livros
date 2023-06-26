@@ -8,15 +8,18 @@ import java.util.List;
 
 @Data
 @Entity
-public class Categoria {
+public class Tipo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     private String nome;
 
-    @OneToMany(mappedBy = "categoria")
+    @OneToOne
+    @JoinColumn(name = "subCategoria_id")
+    private SubCategoria subCategoria;
+
+    @OneToMany(mappedBy = "tipo")
     private List<Produto> produtos = new ArrayList<>();
 
 }

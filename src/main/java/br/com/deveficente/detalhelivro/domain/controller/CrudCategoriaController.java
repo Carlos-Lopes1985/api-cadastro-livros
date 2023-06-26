@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.deveficente.detalhelivro.domain.entity.Categoria;
+import br.com.deveficente.detalhelivro.domain.entity.SubCategoria;
 import br.com.deveficente.detalhelivro.domain.input.NovoCategoriaForm;
 import br.com.deveficente.detalhelivro.domain.service.CategoriaService;
 
@@ -26,7 +26,7 @@ public class CrudCategoriaController {
 	@PostMapping(value="/api/categoria")
 	public ResponseEntity<Void> novoAutor(@Valid @RequestBody NovoCategoriaForm form) {
 		
-		Categoria categoria = categoriaService.salvarCategoria(form);
+		SubCategoria categoria = categoriaService.salvarCategoria(form);
 	
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(categoria.getId()).toUri();
@@ -35,7 +35,7 @@ public class CrudCategoriaController {
 	}
 	
 	@GetMapping(value="/api/categoria")
-	public ResponseEntity<List<Categoria>> buscarTodasCategorias()throws Exception{
+	public ResponseEntity<List<SubCategoria>> buscarTodasCategorias()throws Exception{
 		return ResponseEntity.ok().body(categoriaService.buscarTodos());
 	}
 }
