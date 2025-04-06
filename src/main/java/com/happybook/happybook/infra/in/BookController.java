@@ -1,6 +1,7 @@
 package com.happybook.happybook.infra.in;
 
 import com.happybook.happybook.application.dto.BookRequest;
+import com.happybook.happybook.domain.enums.Operation;
 import com.happybook.happybook.domain.model.Book;
 import com.happybook.happybook.domain.port.in.CreateBookPort;
 import com.happybook.happybook.domain.port.in.FindBookPort;
@@ -46,8 +47,8 @@ public class BookController {
 
 
     @PutMapping("/{bookId}/quantity")
-    public Book updateQuantity(@PathVariable Long bookId, @RequestParam Long quantity) {
-        return updateBookPort.updateQuantity(bookId, quantity);
+    public Book updateQuantity(@PathVariable Long bookId, @RequestParam Long quantity, @RequestParam Enum<Operation> operation) {
+        return updateBookPort.updateQuantity(bookId, quantity, operation);
     }
 }
 
