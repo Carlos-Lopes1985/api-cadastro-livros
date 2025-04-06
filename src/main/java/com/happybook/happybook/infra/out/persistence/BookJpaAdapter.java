@@ -22,11 +22,11 @@ public class BookJpaAdapter implements BookRepository {
 
     @Override
     public Book save(Book book) {
-        BookEntity bookEntity = new BookEntity();
-        bookEntity.setTitle(book.getTitle());
-        repository.save(bookEntity);
-        return book;
+        BookEntity bookEntity = bookMapper.toEntity(book); // usa o mapper para manter o ID
+        BookEntity savedEntity = repository.save(bookEntity); // JPA atualiza se ID existir
+        return bookMapper.toDomain(savedEntity); // mapeia de volta para o domínio
     }
+
 
     @Override
     public Optional<Book> findById(Long id) {

@@ -22,4 +22,5 @@ public interface BookMapper {
 
     List<BookEntity> toEntityList(List<Book> books);
 
+    BookEntity toEntity(Book book);
 }
